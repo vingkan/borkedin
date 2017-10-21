@@ -10,8 +10,8 @@ let cityParksGetter = {
 				}).map((park) => {
 					let entry = {
 						name: park.park_name,
-						latitude: park.mapped_location.coordinates[0],
-						longitude: park.mapped_location.coordinates[1],
+						latitude: park.mapped_location.coordinates[1],
+						longitude: park.mapped_location.coordinates[0],
 						cityid: 'nashville',
 						data: park
 					}
@@ -32,8 +32,8 @@ let cityParksGetter = {
 				}).map((park) => {
 					let entry = {
 						name: park.park_name,
-						latitude: park.location.coordinates[0],
-						longitude: park.location.coordinates[1],
+						latitude: park.location.coordinates[1],
+						longitude: park.location.coordinates[0],
 						cityid: 'chicago',
 						data: park
 					}
@@ -77,8 +77,8 @@ let cityParksGetter = {
 					let coords = park.the_geom.coordinates[0][0][0];
 					let entry = {
 						name: park.signname,
-						latitude: coords[0],
-						longitude: coords[1],
+						latitude: coords[1],
+						longitude: coords[0],
 						cityid: 'newyork',
 						data: park
 					}
@@ -122,8 +122,8 @@ let cityParksGetter = {
 					let coords = park.the_geom.coordinates[0][0][0];
 					let entry = {
 						name: park.description,
-						latitude: coords[0],
-						longitude: coords[1],
+						latitude: coords[1],
+						longitude: coords[0],
 						cityid: 'calgary',
 						data: park
 					}
@@ -149,6 +149,50 @@ let ParksModule = () => {
 					reject('We do not currently have data for this city. Message your city council!');
 				}
 			});
+		},
+
+		renderMap: (list, element, onMarkerClick) => {
+
+			var first = list[0];
+
+			var map = new google.maps.Map(element, {
+				center: {lat: first.latitude, lng: first.longitude},
+				zoom: 10,
+				styles: [	{		"featureType":"landscape",		"stylers":[			{				"hue":"#FFA800"			},			{				"saturation":0			},			{				"lightness":0			},			{				"gamma":1			}		]	},	{		"featureType":"road.highway",		"stylers":[			{				"hue":"#53FF00"			},			{				"saturation":-73			},			{				"lightness":40			},			{				"gamma":1			}		]	},	{		"featureType":"road.arterial",		"stylers":[			{				"hue":"#FBFF00"			},			{				"saturation":0			},			{				"lightness":0			},			{				"gamma":1			}		]	},	{		"featureType":"road.local",		"stylers":[			{				"hue":"#00FFFD"			},			{				"saturation":0			},			{				"lightness":30			},			{				"gamma":1			}		]	},	{		"featureType":"water",		"stylers":[			{				"hue":"#00BFFF"			},			{				"saturation":6			},			{				"lightness":8			},			{				"gamma":1			}		]	},	{		"featureType":"poi",		"stylers":[			{				"hue":"#679714"			},			{				"saturation":33.4			},			{				"lightness":-25.4			},			{				"gamma":1			}		]	}]
+			});
+
+			let lastWindow = false;
+
+			for (var i = 0; i < list.length; i++) {
+
+				let park = list[i];
+
+				let html = `
+					<h1>${park.name}</h1>
+				`;
+
+				let infowindow = new google.maps.InfoWindow({
+					content: html
+				});
+
+				let marker = new google.maps.Marker({
+					position: {lat: park.latitude, lng: park.longitude},
+					map: map,
+					title: park.name
+				});
+
+				marker.addListener('click', function() {
+					onMarkerClick(park);
+					infowindow.open(map, marker);
+					if (lastWindow) {
+						lastWindow.close();
+					}
+					lastWindow = infowindow;
+				});
+			}
+
+			return map;
+
 		}
 
 	}

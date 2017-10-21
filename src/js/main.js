@@ -4,6 +4,7 @@ let config = require('./config');
 let FirebaseApp = firebase.initializeApp(config);
 let db = FirebaseApp.database();
 
+const GOOGLE_MAPS_API_KEY = 'AIzaSyBIZRYftboGELfzOFmSUrcMkYwWtQN7sF8';
 const PARAMS = getQueryParams(document.location.search);
 const GAME = PARAMS.game;
 
@@ -25,21 +26,36 @@ function showPage(id) {
 	document.getElementById(`page-${id}`).style.display = 'block';
 }
 
-console.log('Dogs rule.')
 
-let routes = {
-	'/profile/:profileid': (profileid) => {
-		console.log(profileid);
-		showPage('profile');
-	},
-	'/parks/:cityid': (cityid) => {
-		console.log(cityid);
-		showPage('parks');
-		parksModule.getParks(cityid).then((data) => {
-			console.log(data);
-		}).catch(console.error);
-	}
+let parkName = document.getElementById('park-name');
+let parkImage = document.getElementById('park-image');
+
+function onMarkerClick(park) {
+	parkName.innerText = park.name;
+	//parkImage.src = `https://maps.googleapis.com/maps/api/streetview?size=600x300&location=${park.latitude},${park.longitude}&heading=151.78&pitch=-0.76&key=${GOOGLE_MAPS_API_KEY}`;
+
 }
 
-let router = Router(routes);
-router.init();
+window.main = () => {
+
+	let routes = {
+		'/profile/:profileid': (profileid) => {
+			console.log(profileid);
+			showPage('profile');
+		},
+		'/parks/:cityid': (cityid) => {
+			console.log(cityid);
+			showPage('parks');
+			parksModule.getParks(cityid).then((data) => {
+
+				let mapEl = document.getElementById('map-holder');
+				let map = parksModule.renderMap(data, mapEl, onMarkerClick);
+
+			}).catch(console.error);
+		}
+	}
+
+	let router = Router(routes);
+	router.init();
+
+}

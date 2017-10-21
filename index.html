@@ -49,17 +49,15 @@
 		<div id="page-parks" class="page-hidden">
 			<section class="hero">
 				<div class="hero-body is-gray">
-					<br>
-					<br>
-					<br>
-					<br>
+					<div id="map-holder"></div>
 				</div>
 			</section>
 			<section class="section">
 				<div class="container">
 					<div class="profile-section content">
-						<h2 class="title is-2">Centennial Park</h2>
+						<h2 id="park-name" class="title is-2">Centennial Park</h2>
 						<p class="subtitle is-5">This is a great park to take dogs.</p>
+						<img id="park-image">
 					</div>
 				</div>
 			</section>
@@ -159,5 +157,6 @@
 		</div>
 
 		<script type="text/javascript" src="./public/js/main.js"></script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?callback=main"></script>
 	</body>
 </html>
