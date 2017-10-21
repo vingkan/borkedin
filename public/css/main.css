@@ -19,3 +19,28 @@
 	outline: none;
 	border: none;
 }
+
+.is-circular {
+	border-radius: 50%;
+}
+
+.profile-image .is-filled-image {
+	width: 200px;
+	height: 200px;
+	margin: 0 auto;
+	display: block;
+}
+
+.is-filled-image {
+	background: gray;
+	background-repeat: no-repeat;
+	background-position: center center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.subtitle.is-followed {
+	margin-bottom: 0 !important;
+}
