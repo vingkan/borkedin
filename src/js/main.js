@@ -25,6 +25,8 @@ function showPage(id) {
 	document.getElementById(`page-${id}`).style.display = 'block';
 }
 
+console.log('Dogs rule.')
+
 let routes = {
 	'/profile/:profileid': (profileid) => {
 		console.log(profileid);
