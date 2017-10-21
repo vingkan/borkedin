@@ -1,0 +1,21 @@
+.navbar {
+	background: #59A5CC;
+}
+
+.is-bold {
+	font-weight: bold !important;
+}
+
+.is-white {
+	color: white !important;
+}
+
+.navbar-logo {
+	margin-right: 10px;
+}
+
+.navbar-search {
+	margin: 10px;
+	outline: none;
+	border: none;
+}
