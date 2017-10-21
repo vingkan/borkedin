@@ -14,13 +14,15 @@
 		<link rel="icon" sizes="192x192" href="./public/img/favicon.png">
 		<!--<link rel="image_src" href="https://fantasycivics.github.io/public/img/tile-color.png">-->
 
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://rawgit.com/flatiron/director/master/build/director.min.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.js"></script>
 		
 		<script src="https://use.fontawesome.com/c32bc59f9b.js"></script>
 		<link href="https://fonts.googleapis.com/css?family=Roboto:400,900" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.css">
+		<link rel="stylesheet" href="./public/css/styles.css">
 		<link rel="stylesheet" href="./public/css/main.css">
 		<link rel="stylesheet" href="./public/css/loader.css">
 		
@@ -35,80 +37,59 @@
 			<div class="navbar-brand">
 				<a class="navbar-item" href="./">
 					<img class="navbar-logo" src="./public/img/logo-white.png">
-					<span class="is-bold is-white">BorkedIn</span>
+					<p class="title is-3 is-bold is-white">BorkedIn</p>
 				</a>
 				<span>
 					<input type="text" class="input navbar-search" placeholder="Search for good boys">
 				</span>
 			</div>
 		</nav>
-		<section class="section">
-			<div class="container">
-				<div class="profile-header content has-text-centered">
-					<div class="profile-image">
-						<div class="is-filled-image is-circular" style="background-image: url('./public/img/colt.jpg');"></div>
+
+		<!-- /parks -->
+		<div id="page-parks" class="page-hidden">
+			<section class="hero">
+				<div class="hero-body is-gray">
+					<br>
+					<br>
+					<br>
+					<br>
+				</div>
+			</section>
+			<section class="section">
+				<div class="container">
+					<div class="profile-section content">
+						<h2 class="title is-2">Centennial Park</h2>
+						<p class="subtitle is-5">This is a great park to take dogs.</p>
 					</div>
-					<h1 class="title is-1">Colt Daniels</h1>
-					<div class="field is-grouped is-grouped-centered">
-						<div class="group">
-							<button class="button is-primary">Connect</button>
-							<button class="button is-primary is-outlined">Send Pats</button>
+				</div>
+			</section>
+		</div>
+
+		<!-- /profile/:profileid -->
+		<div id="page-profile" class="page-hidden">
+			<section class="hero">
+				<div class="hero-body is-gray">
+					<div class="container">
+						<div class="profile-header content has-text-centered">
+							<div class="profile-image">
+								<div class="is-filled-image is-circular" style="background-image: url('./public/img/colt-head.jpg');"></div>
+							</div>
+							<h1 class="title is-1">Colt Daniels</h1>
+							<div class="field is-grouped is-grouped-centered">
+								<div class="group">
+									<button class="button is-primary">Connect</button>
+									<button class="button is-primary is-outlined">Send Pats</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="profile-section content">
-					<h2 class="title is-2">Experience</h2>
-					<div class="">
-						<div class="media">
-							<div class="media-left">
-								<figure class="image is-64x64">
-									<img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-								</figure>
-							</div>
-							<div class="media-content">
-								<h3 class="title is-3">Aetna Health</h3>
-								<p class="subtitle is-5 is-followed">Emotional Support Dog</p>
-								<p class="subtitle is-5">January 2017 - Present</p>
-								<p>I help. hoomans. be happy and content with their lives. because i love them. and want them to be happy.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="profile-section content">
-					<h2 class="title is-2">Endorsements</h2>
-					<div class="is-table-holder">
-						<table class="table">
-							<tbody>
-								<tr>
-									<td>
-										<div class="tags has-addons">
-											<span class="tag">Emotional Support <i class="icon fa fa-heart"></i></span>
-											<span class="tag is-success">100+</i></span>
-										</div>
-									</td>
-									<td>
-										<p>Endorsed by Dogtor Puppers, who is highly skilled at this.</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="tags has-addons">
-											<span class="tag">Fetching <i class="icon fa fa-futbol-o"></i></span>
-											<span class="tag is-success">78</i></span>
-										</div>
-									</td>
-									<td>
-										<p>Endorsed by Rex Roofer, who is highly skilled at this.</p>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="profile-section content">
-					<h2 class="title is-2">Connections</h2>
-					<div class="columns is-multiline">
-						<div class="column is-6">
+			</section>
+			<section class="section">
+				<div class="container">
+					<div class="profile-section content">
+						<h2 class="title is-2">Experience</h2>
+						<div class="">
 							<div class="media">
 								<div class="media-left">
 									<figure class="image is-64x64">
@@ -116,15 +97,67 @@
 									</figure>
 								</div>
 								<div class="media-content">
-									<h3 class="title is-3">Rex Roofer</h3>
-									<p class="subtitle is-5 is-followed">NFL Player (National Fetching League)</p>
+									<h3 class="title is-3">Aetna Health</h3>
+									<p class="subtitle is-5 is-followed">Emotional Support Dog</p>
+									<p class="subtitle is-5">January 2017 - Present</p>
+									<p>I help. hoomans. be happy and content with their lives. because i love them. and want them to be happy.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="profile-section content">
+						<h2 class="title is-2">Endorsements</h2>
+						<div class="is-table-holder">
+							<table class="table">
+								<tbody>
+									<tr>
+										<td>
+											<div class="tags has-addons">
+												<span class="tag">Emotional Support <i class="icon fa fa-heart"></i></span>
+												<span class="tag is-success">100+</i></span>
+											</div>
+										</td>
+										<td>
+											<p>Endorsed by Dogtor Puppers, who is highly skilled at this.</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="tags has-addons">
+												<span class="tag">Fetching <i class="icon fa fa-futbol-o"></i></span>
+												<span class="tag is-success">78</i></span>
+											</div>
+										</td>
+										<td>
+											<p>Endorsed by Rex Roofer, who is highly skilled at this.</p>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="profile-section content">
+						<h2 class="title is-2">Connections</h2>
+						<div class="columns is-multiline">
+							<div class="column is-6">
+								<div class="media">
+									<div class="media-left">
+										<figure class="image is-64x64">
+											<img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+										</figure>
+									</div>
+									<div class="media-content">
+										<h3 class="title is-3">Rex Roofer</h3>
+										<p class="subtitle is-5 is-followed">NFL Player (National Fetching League)</p>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</section>
+			</section>
+		</div>
+
 		<script type="text/javascript" src="./public/js/main.js"></script>
 	</body>
 </html>

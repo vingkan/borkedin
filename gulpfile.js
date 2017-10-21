@@ -13,6 +13,7 @@ let moduleimporter = require('sass-module-importer');
 gulp.task('build-js', function(){
 	let files = [
 		{file: 'main', src: 'src/js', dest: 'public/js'}
+		//{file: 'parks', src: 'src/js', dest: 'public/js'}
 	];
 	return merge(files.map(function(fileData){
 		let file = fileData.file;

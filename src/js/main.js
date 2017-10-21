@@ -1,3 +1,5 @@
+let pm = require('./parks');
+let parksModule = pm.ParksModule();
 let config = require('./config');
 let FirebaseApp = firebase.initializeApp(config);
 let db = FirebaseApp.database();
@@ -15,3 +17,27 @@ function getQueryParams(qs) {
 	}
 	return params;
 }
+
+function showPage(id) {
+	Array.from(document.getElementsByClassName('page-hidden')).forEach((page) => {
+		page.style.display = 'none';
+	});
+	document.getElementById(`page-${id}`).style.display = 'block';
+}
+
+let routes = {
+	'/profile/:profileid': (profileid) => {
+		console.log(profileid);
+		showPage('profile');
+	},
+	'/parks/:cityid': (cityid) => {
+		console.log(cityid);
+		showPage('parks');
+		parksModule.getParks(cityid).then((data) => {
+			console.log(data);
+		}).catch(console.error);
+	}
+}
+
+let router = Router(routes);
+router.init();
