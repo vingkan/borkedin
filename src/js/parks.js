@@ -87,6 +87,29 @@ let cityParksGetter = {
 				resolve(cleaned);
 			}).catch(reject);
 		});
+	},
+
+	calgary: () => {
+		return new Promise((resolve, reject) => {
+			$.get('https://data.calgary.ca/resource/enr4-crti.json', {
+
+			}).then((data) => {
+				let cleaned = data.filter((park) => {
+					return park.the_geom;
+				}).map((park) => {
+					let coords = park.the_geom.coordinates[0][0][0];
+					let entry = {
+						name: park.description,
+						latitude: coords[0],
+						longitude: coords[1],
+						cityid: 'calgary',
+						data: park
+					}
+					return entry;
+				});
+				resolve(cleaned);
+			}).catch(reject);
+		});
 	}
 
 }
