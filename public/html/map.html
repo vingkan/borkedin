@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Infowindow</title>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<meta charset="utf-8">
+		<style>
+			/* Always set the map height explicitly to define the size of the div
+			* element that contains the map. */
+			#map {
+				height: 100%;
+			}
+			/* Optional: Makes the sample page fill the window. */
+			html, body {
+				height: 100%;
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="map"></div>
+		<script>
+
+			function initMap() {
+
+				var list = [
+					{
+						name: "Vandy",
+						latitude: 36.1432608,
+						longitude: -86.8056565999
+					},
+					{
+						name: "Vandy 2",
+						latitude: 36.2432608,
+						longitude: -86.9056565999
+					}
+				]
+
+				var first = list[0]
+
+				var map = new google.maps.Map(document.getElementById('map'), {
+					center: {lat: first.latitude, lng: first.longitude},
+					zoom: 10,
+					styles: [	{		"featureType":"landscape",		"stylers":[			{				"hue":"#FFA800"			},			{				"saturation":0			},			{				"lightness":0			},			{				"gamma":1			}		]	},	{		"featureType":"road.highway",		"stylers":[			{				"hue":"#53FF00"			},			{				"saturation":-73			},			{				"lightness":40			},			{				"gamma":1			}		]	},	{		"featureType":"road.arterial",		"stylers":[			{				"hue":"#FBFF00"			},			{				"saturation":0			},			{				"lightness":0			},			{				"gamma":1			}		]	},	{		"featureType":"road.local",		"stylers":[			{				"hue":"#00FFFD"			},			{				"saturation":0			},			{				"lightness":30			},			{				"gamma":1			}		]	},	{		"featureType":"water",		"stylers":[			{				"hue":"#00BFFF"			},			{				"saturation":6			},			{				"lightness":8			},			{				"gamma":1			}		]	},	{		"featureType":"poi",		"stylers":[			{				"hue":"#679714"			},			{				"saturation":33.4			},			{				"lightness":-25.4			},			{				"gamma":1			}		]	}]
+				});
+
+				for (var i = 0; i < list.length; i++) {
+
+					let park = list[i];
+
+					let html = `
+						<h1>${park.name}</h1>
+						<img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location=${park.latitude},${park.longitude}&heading=151.78&pitch=-0.76">					
+					`;
+
+					let infowindow = new google.maps.InfoWindow({
+						content: html
+					});
+
+					let marker = new google.maps.Marker({
+						position: {lat: park.latitude, lng: park.longitude},
+						map: map,
+						title: park.name
+					});
+
+					marker.addListener('click', function() {
+						console.log(park)
+						infowindow.open(map, marker);
+					});
+				}
+			}
+
+		</script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
+	</body>
+</html>
