@@ -89,6 +89,28 @@ let cityParksGetter = {
 		});
 	},
 
+	seattle: () => {
+		return new Promise((resolve, reject) => {
+			$.get('https://data.seattle.gov/resource/fa7z-wkeh.json', {
+
+			}).then((data) => {
+				let cleaned = data.filter((park) => {
+					return park.location_1;
+				}).map((park) => {
+					let entry = {
+						name: park.common_name,
+						latitude: parseFloat(park.location_1.latitude),
+						longitude: parseFloat(park.location_1.longitude),
+						cityid: 'seattle',
+						data: park
+					}
+					return entry;
+				});
+				resolve(cleaned);
+			}).catch(reject);
+		});
+	},
+
 	calgary: () => {
 		return new Promise((resolve, reject) => {
 			$.get('https://data.calgary.ca/resource/enr4-crti.json', {
