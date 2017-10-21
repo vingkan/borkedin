@@ -1,2 +1,2 @@
-# borkedin
+# BorkedIn
 LinkedIn, but for dogs.

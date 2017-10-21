@@ -1,0 +1,37 @@
+{
+  "name": "borkedin",
+  "version": "0.0.0",
+  "description": "LinkedIn, but for dogs.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vingkan/borkedin.git"
+  },
+  "author": "Vinesh Kannan <v@hawk.iit.edu>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vingkan/borkedin/issues"
+  },
+  "homepage": "https://github.com/vingkan/borkedin#readme",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^7.3.0",
+    "browserify": "^14.4.0",
+    "bulma": "^0.5.0",
+    "firebase": "^4.6.0",
+    "gulp": "^3.9.1",
+    "gulp-livereload": "^3.8.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-uglify": "^3.0.0",
+    "merge-stream": "^1.0.1",
+    "prometheusjs": "^1.6.5",
+    "request": "^2.81.0",
+    "sass-module-importer": "^1.4.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}
