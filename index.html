@@ -39,7 +39,7 @@
 	<body>
 		<nav class="navbar">
 			<div class="navbar-brand">
-				<a class="navbar-item" href="./">
+				<a class="navbar-item" href="./#/">
 					<img class="navbar-logo" src="./public/img/pawslogo-white.png">
 					<p class="title is-3 is-bold is-white">BorkedIn</p>
 				</a>
@@ -127,11 +127,13 @@
 							<div class="profile-image">
 								<div id="profile-doggo-image" class="is-filled-image is-circular" style="background-image: url('./public/img/colt-head.jpg');"></div>
 							</div>
-							<h1 class="title is-1"><span id="profile-doggo-name">...</span> <span class="tag is-warning">3<sup>rd</sup></span></h1>
+							<h1 class="title is-1"><span id="profile-doggo-name" contenteditable="false">...</span> <span class="tag is-warning">3<sup>rd</sup></span></h1>
 							<div class="field is-grouped is-grouped-centered">
 								<div class="group">
 									<button class="button is-primary is-medium">Connect</button>
 									<button class="button is-primary is-outlined is-medium">Send Pats</button>
+									<button id="secret-rename" class="is-hidden" accesskey="h"></button>
+									<!--<button id="next" class="button is-primary is-outlined is-medium">Save</button>-->
 								</div>
 							</div>
 						</div>

@@ -80,7 +80,10 @@ function addExperience(profileid) {
 	return db.ref(`profile/${profileid}/experience`).push(exp);
 }
 
+let CURRENT_PROFILE_ID = false;
+
 function initProfile(profileid, editMode) {
+	CURRENT_PROFILE_ID = profileid;
 	showPage('profile');
 	db.ref(`profile/${profileid}`).on('value', (snap) => {
 		let val = snap.val() || {};
@@ -173,6 +176,39 @@ function initLanding() {
 	});
 }
 
+document.getElementById('secret-rename').addEventListener('click', (e) => {
+	let name = prompt("Enter a New Name");
+	db.ref(`profile/${CURRENT_PROFILE_ID}/name`).set(name);
+});
+
+/*db.ref(`profile`).once('value', (snap) => {
+	let val = snap.val() || {};
+	let pids = Object.keys(val);
+	let idx = 0;
+	let nextID = pids[idx];
+	document.location = `/#/profile/${nextID}`;
+	let next = document.getElementById('next');
+	next.addEventListener('click', (e) => {
+		if (nextID) {
+			let name = doggoName.innerText;
+			db.ref(`profile/${nextID}/name`).set(name).then((done) => {
+				idx++;
+				nextID = pids[idx];
+				if (!nextID) {
+					alert('all done!!');
+				} else {
+					document.location = `/#/profile/${nextID}`;
+				}
+			}).catch(console.error);
+		}
+	});
+});*/
+
+const PRETTY_NAMES = {
+	'bruno': '889880896479866881',
+	'snuggles': '900429189278511105'
+}
+
 window.main = () => {
 
 	initLanding();
@@ -183,13 +219,23 @@ window.main = () => {
 			initLanding();
 		},
 
+		'/profile': () => {
+			initLanding();
+		},
+
 		'/profile/:profileid': (profileid) => {
 			console.log(profileid);
+			if (profileid in PRETTY_NAMES) {
+				profileid = PRETTY_NAMES[profileid];
+			}
 			initProfile(profileid, false);
 		},
 
 		'/profile/:profileid/edit': (profileid) => {
 			console.log(profileid);
+			if (profileid in PRETTY_NAMES) {
+				profileid = PRETTY_NAMES[profileid];
+			}
 			initProfile(profileid, true);
 		},
 
