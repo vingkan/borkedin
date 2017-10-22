@@ -6,6 +6,10 @@
 	background: #59A5CC;
 }
 
+.title {
+	font-weight: bold !important;
+}
+
 .is-bold {
 	font-weight: bold !important;
 }
@@ -61,4 +65,8 @@
 #map-holder {
 	width: 100%;
 	height: 400px;
+}
+
+.profile-experience {
+	margin-bottom: 20px;
 }

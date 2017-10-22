@@ -31,12 +31,15 @@
 			/* */
 
 		</style>
+
+<script type="text/javascript" src="https://www.gstatic.com/knowledge/kgsearch/widget/1.0/widget.min.js"></script>
+
 	</head>
 	<body>
 		<nav class="navbar">
 			<div class="navbar-brand">
 				<a class="navbar-item" href="./">
-					<img class="navbar-logo" src="./public/img/logo-white.png">
+					<img class="navbar-logo" src="./public/img/pawslogo-white.png">
 					<p class="title is-3 is-bold is-white">BorkedIn</p>
 				</a>
 				<span>
@@ -70,9 +73,9 @@
 					<div class="container">
 						<div class="profile-header content has-text-centered">
 							<div class="profile-image">
-								<div class="is-filled-image is-circular" style="background-image: url('./public/img/colt-head.jpg');"></div>
+								<div id="profile-doggo-image" class="is-filled-image is-circular" style="background-image: url('./public/img/colt-head.jpg');"></div>
 							</div>
-							<h1 class="title is-1">Colt Daniels</h1>
+							<h1 id="profile-doggo-name" class="title is-1">Colt Daniels</h1>
 							<div class="field is-grouped is-grouped-centered">
 								<div class="group">
 									<button class="button is-primary">Connect</button>
@@ -87,7 +90,8 @@
 				<div class="container">
 					<div class="profile-section content">
 						<h2 class="title is-2">Experience</h2>
-						<div class="">
+						<div id="experience-holder"></div>
+						<div class="profile-experience">
 							<div class="media">
 								<div class="media-left">
 									<figure class="image is-64x64">
@@ -95,42 +99,36 @@
 									</figure>
 								</div>
 								<div class="media-content">
-									<h3 class="title is-3">Aetna Health</h3>
-									<p class="subtitle is-5 is-followed">Emotional Support Dog</p>
-									<p class="subtitle is-5">January 2017 - Present</p>
-									<p>I help. hoomans. be happy and content with their lives. because i love them. and want them to be happy.</p>
+									<div class="field">
+										<label class="label">Title</label>
+										<div class="control">
+											<input id="experience-title" class="input" type="text" placeholder="Text input">
+										</div>
+									</div>
+									<div class="field">
+										<label class="label">Range</label>
+										<div class="control">
+											<input id="experience-range" class="input" type="text" placeholder="Text input">
+										</div>
+									</div>
+									<div class="field">
+										<label class="label">Description</label>
+										<div class="control">
+											<textarea id="experience-description" class="textarea" placeholder="Textarea"></textarea>
+										</div>
+									</div>
+									<div class="control">
+  										<button id="experience-submit" class="button is-primary">Add new expawrience</button>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="profile-section content">
-						<h2 class="title is-2">Endorsements</h2>
+						<h2 class="title is-2">Skills</h2>
 						<div class="is-table-holder">
-							<table class="table">
-								<tbody>
-									<tr>
-										<td>
-											<div class="tags has-addons">
-												<span class="tag">Emotional Support <i class="icon fa fa-heart"></i></span>
-												<span class="tag is-success">100+</i></span>
-											</div>
-										</td>
-										<td>
-											<p>Endorsed by Dogtor Puppers, who is highly skilled at this.</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="tags has-addons">
-												<span class="tag">Fetching <i class="icon fa fa-futbol-o"></i></span>
-												<span class="tag is-success">78</i></span>
-											</div>
-										</td>
-										<td>
-											<p>Endorsed by Rex Roofer, who is highly skilled at this.</p>
-										</td>
-									</tr>
-								</tbody>
+							<table class="table is-fullwidth">
+								<tbody id="skill-holder"></tbody>
 							</table>
 						</div>
 					</div>
@@ -152,11 +150,30 @@
 							</div>
 						</div>
 					</div>
+					<div class="profile-section content">
+						<h2 class="title is-2">Causes for Frens</h2>
+						<div class="columns is-multiline">
+							<div class="column is-11">
+								<div class="media">
+									<div class="media-left">
+										<figure class="image is-128x128">
+											<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/American_Society_for_the_Prevention_of_Cruelty_to_Animals_%28logo%29.svg/1024px-American_Society_for_the_Prevention_of_Cruelty_to_Animals_%28logo%29.svg.png" alt="ASPCA.png">
+											<button class="button is-primary is-small">Henslo, donate hur.</button>
+										</figure>
+									</div>
+									<div class="media-content">
+										<h3 class="title is-4">ASPCA</h3>
+										<p class="subtitle is-6 is-followed">Am doin a give to bamboozled puppers. Halpin dem by doin a tol concern. Dang heckin' smol doggos borkin for halp. Hooman not der.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</section>
 		</div>
 
 		<script type="text/javascript" src="./public/js/main.js"></script>
-		<script async defer src="https://maps.googleapis.com/maps/api/js?callback=main"></script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?callback=main&key=AIzaSyBIZRYftboGELfzOFmSUrcMkYwWtQN7sF8"></script>
 	</body>
 </html>
