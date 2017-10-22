@@ -38,7 +38,7 @@ function onMarkerClick(park) {
 
 let expTitle = document.getElementById('experience-title');
 let expRange = document.getElementById('experience-range');
-let expDesc = document.getElementById('experience-decription');
+let expDesc = document.getElementById('experience-description');
 let expSubmit = document.getElementById('experience-submit');
 
 function addExperience(profileid) {
