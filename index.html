@@ -131,16 +131,10 @@
 							<div class="field is-grouped is-grouped-centered">
 								<div class="group">
 									<button class="button is-primary is-medium">Connect</button>
-									<button class="button is-primary is-outlined is-medium">Send Pats</button>
+									<button class="button is-primary is-outlined is-medium" onclick="sendPats();">Send Pats</button>
 									<button id="secret-rename" class="is-hidden" accesskey="h"></button>
 									<!--<button id="next" class="button is-primary is-outlined is-medium">Save</button>-->
-									<ul class="pats">
-										<div class="pat"></div>
-										<div class="pat"></div>
-										<div class="pat"></div>
-										<div class="pat"></div>
-										<div class="pat"></div>
-									</ul>
+									<div id="pats-holder"></div>
 								</div>
 							</div>
 						</div>

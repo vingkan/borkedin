@@ -112,8 +112,8 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	width:100%;
-	height:100%;
+	width: 100%;
+	height: 75%;
 	z-index: 0;
 	-webkit-transform: translateZ(0);
 	transform: translateZ(0);
@@ -123,8 +123,9 @@
 	position: absolute;
 	list-style: none;
 	display: block;
-	background-color: rgba(234, 69, 100, 0.15);
-	/*background-image: ;*/
+	/*background-color: rgba(234, 69, 100, 0.15);*/
+	background-image: url('../img/pinkheart.png');
+	background-size: 100% 100%;
 	bottom: -100px;
 	-webkit-animation: square 10s infinite;
 	animation: square 10s infinite;
@@ -133,26 +134,34 @@
 }
 
 .pats div:nth-child(1) {
-	width: 40px;
-	height: 40px;
+	width: 50px;
+	height: 50px;
 	left: 20%;
+	-webkit-animation: squaredope 10s infinite;
+	animation: squaredope 10s infinite;
+	-webkit-animation-delay: 0s;
+	animation-delay: 0s;
+	-webkit-animation-duration: 7s;
+	animation-duration: 7s;
 }
 .pats div:nth-child(2) {
 	width: 60px;
 	height: 60px;
-	left: 40%;
-	-webkit-animation-delay: 1s;
-	animation-delay: 1s;
-	-webkit-animation-duration:97s;
+	left: 35%;
+	-webkit-animation-delay: 0s;
+	animation-delay: 0s;
+	-webkit-animation-duration: 9s;
 	animation-duration: 9s;
 }
 
 .pats div:nth-child(3) {
 	width: 50px;
 	height: 50px;
-	left: 60%;
-	-webkit-animation-delay: 1.5s;
-	animation-delay: 1.5s;
+	left: 55%;
+	-webkit-animation: squaredope 10s infinite;
+	animation: squaredope 10s infinite;
+	-webkit-animation-delay: 0s;
+	animation-delay: 0s;
 	-webkit-animation-duration: 7s;
 	animation-duration: 7s;
 }
@@ -160,21 +169,21 @@
 .pats div:nth-child(4) {
 	width: 80px;
 	height: 80px;
-	left: 80%;
-	-webkit-animation-delay: 1s;
-	animation-delay: 1s;
-	-webkit-animation-duration: 11s;
-	animation-duration: 11s;
+	left: 65%;
+	-webkit-animation-delay: 0s;
+	animation-delay: 0s;
+	-webkit-animation-duration: 10s;
+	animation-duration: 10s;
 }
 
 .pats div:nth-child(5) {
 	width: 50px;
 	height: 50px;
-	left: 50%;
-	-webkit-animation-delay: 0.75s;
-	animation-delay: 0.75s;
-	-webkit-animation-duration: 4s;
-	animation-duration: 4s;
+	left: 45%;
+	-webkit-animation-delay: 0s;
+	animation-delay: 0s;
+	-webkit-animation-duration: 8s;
+	animation-duration: 8s;
 }
 
 @-webkit-keyframes square {
@@ -196,5 +205,27 @@
 	100% {
 	    -webkit-transform: translateY(-1080px) rotate(630deg);
 	    transform: translateY(-1080px) rotate(630deg);
+	}
+}
+
+@-webkit-keyframes squaredope {
+	0% {
+	    -webkit-transform: translateY(0);
+	    transform: translateY(0);
+	}
+	100% {
+	    -webkit-transform: translateY(-1080px) rotate(-630deg);
+	    transform: translateY(-1080px) rotate(-630deg);
+	}
+}
+
+@keyframes squaredope {
+	0% {
+	    -webkit-transform: translateY(0);
+	    transform: translateY(0);
+	}
+	100% {
+	    -webkit-transform: translateY(-1080px) rotate(-630deg);
+	    transform: translateY(-1080px) rotate(-630deg);
 	}
 }

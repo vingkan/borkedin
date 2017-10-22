@@ -204,15 +204,25 @@ document.getElementById('secret-rename').addEventListener('click', (e) => {
 	});
 });*/
 
-window.sendPats = (patsOn) => {
-	Array.from(document.getElementsByClassName('pat')).forEach((p) => {
-		p.style.display = (patsOn ? 'block' : 'none');
-	});
-	if (patsOn) {
-		setTimeout(() => {
-			sendPats(false);
-		}, 7 * 1000);
-	}
+window.sendPats = () => {
+	/*Array.from(document.getElementsByClassName('pat')).forEach((p) => {
+		p.style.display = 'block';
+	});*/
+	let ph = document.getElementById('pats-holder');
+	ph.innerHTML = `
+		<ul class="pats">
+			<div class="pat"></div>
+			<div class="pat"></div>
+			<div class="pat"></div>
+			<div class="pat"></div>
+			<div class="pat"></div>
+		</ul>
+	`;
+	setTimeout(function() {
+		Array.from(document.getElementsByClassName('pat')).forEach((p) => {
+			p.style.display = 'none';
+		});
+	}, 7000);
 }
 
 const PRETTY_NAMES = {
