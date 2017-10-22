@@ -105,18 +105,26 @@ window.main = () => {
 
 		'/parks/:cityid': (cityid) => {
 			console.log(cityid);
-			showPage('parks');
-			parksModule.getParks(cityid).then((data) => {
+			if (parksModule.CITIES.indexOf(cityid) > -1) {
+				showPage('parks');
+				parksModule.getParks(cityid).then((data) => {
 
-				let mapEl = document.getElementById('map-holder');
-				let map = parksModule.renderMap(data, mapEl, onMarkerClick);
+					let mapEl = document.getElementById('map-holder');
+					let map = parksModule.renderMap(data, mapEl, onMarkerClick);
 
-			}).catch(console.error);
+				}).catch(console.error);
+			} else {
+				document.location = './#/404';
+			}
 		},
 
 		'/vr/:parkid': (parkid) => {
 			console.log(parkid);
 			document.location = `./${parkid}.html`;
+		},
+
+		'/404': () => {
+			showPage('404');
 		}
 
 	}

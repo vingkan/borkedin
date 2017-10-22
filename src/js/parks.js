@@ -140,6 +140,8 @@ let ParksModule = () => {
 
 	let pmod = {
 
+		CITIES: Object.keys(cityParksGetter),
+
 		getParks: (cityid) => {
 			return new Promise((resolve, reject) => {
 				let getter = cityParksGetter[cityid];
