@@ -36,13 +36,37 @@ function onMarkerClick(park) {
 
 }
 
+let expTitle = document.getElementById('experience-title');
+let expRange = document.getElementById('experience-range');
+let expDesc = document.getElementById('experience-decription');
+let expSubmit = document.getElementById('experience-submit');
+
+function addExperience(profileid) {
+	let exp = {
+		title: expTitle.value,
+		range: expRange.value,
+		description: expDesc.value
+	}
+	return db.ref(`profile/${profileid}/experience`).push(exp);
+}
+
 window.main = () => {
 
 	let routes = {
+
 		'/profile/:profileid': (profileid) => {
+
 			console.log(profileid);
 			showPage('profile');
+
+			expSubmit.addEventListener('click', (e) => {
+				addExperience(profileid).then((done) => {
+
+				}).catch(console.error);
+			});
+
 		},
+
 		'/parks/:cityid': (cityid) => {
 			console.log(cityid);
 			showPage('parks');
@@ -53,6 +77,7 @@ window.main = () => {
 
 			}).catch(console.error);
 		}
+
 	}
 
 	let router = Router(routes);
