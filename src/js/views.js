@@ -67,6 +67,23 @@ let Views = () => {
 				div.classList.add('column');
 				div.classList.add('is-6');
 			return div;
+		},
+
+		getLandingCard: (model) => {
+			let html = `
+				<div class="box">
+					<div class="image is-225x225">
+						<div class="is-filled-image" style="background-image: url('${model.image}');"></div>
+					</div>
+					<h2 class="title is-2 is-neatly-spaced">${model.name}</h2>
+					<a href="./#/profile/${model.id}" class="button is-primary is-outlined">View Profile</a>
+				</div>
+			`;
+			let div = document.createElement('div');
+				div.innerHTML = html;
+				div.classList.add('column');
+				div.classList.add('is-3');
+			return div;
 		}
 
 	}

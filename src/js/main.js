@@ -136,7 +136,6 @@ function renderProfile(profile) {
 	let query = db.ref(`profile`).orderByChild(`skills/${skillid}/endorsements`).limitToLast(6);
 	query.once('value', (snap) => {
 		let val = snap.val() || {};
-		console.log(val);
 		for (let did in val) {
 			let connec = val[did];
 			let v = views.getConnectionCard(connec);
@@ -158,9 +157,31 @@ function initCityParks(cityid) {
 	}
 }
 
+let landingHolder = document.getElementById('landing-holder');
+
+function initLanding() {
+	showPage('landing');
+	let ref = db.ref(`profile`)
+	ref.once('value', (snap) => {
+		let val = snap.val() || {};
+		landingHolder.innerHTML = '';
+		for (let did in val) {
+			let doggo = val[did];
+			let v = views.getLandingCard(doggo);
+			landingHolder.appendChild(v);
+		}
+	});
+}
+
 window.main = () => {
 
+	initLanding();
+
 	let routes = {
+
+		'/': () => {
+			initLanding();
+		},
 
 		'/profile/:profileid': (profileid) => {
 			console.log(profileid);
