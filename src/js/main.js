@@ -204,6 +204,17 @@ document.getElementById('secret-rename').addEventListener('click', (e) => {
 	});
 });*/
 
+window.sendPats = (patsOn) => {
+	Array.from(document.getElementsByClassName('pat')).forEach((p) => {
+		p.style.display = (patsOn ? 'block' : 'none');
+	});
+	if (patsOn) {
+		setTimeout(() => {
+			sendPats(false);
+		}, 7 * 1000);
+	}
+}
+
 const PRETTY_NAMES = {
 	'bruno': '889880896479866881',
 	'snuggles': '900429189278511105'

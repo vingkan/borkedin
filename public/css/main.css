@@ -104,3 +104,97 @@
 	bottom: 10px !important;
 	right: 10px !important;
 }
+
+/* PATS ANIMATION */
+/* https://www.youtube.com/watch?v=ETXba6QOzYg */
+
+.pats {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width:100%;
+	height:100%;
+	z-index: 0;
+	-webkit-transform: translateZ(0);
+	transform: translateZ(0);
+}
+
+.pats div {
+	position: absolute;
+	list-style: none;
+	display: block;
+	background-color: rgba(234, 69, 100, 0.15);
+	/*background-image: ;*/
+	bottom: -100px;
+	-webkit-animation: square 10s infinite;
+	animation: square 10s infinite;
+	-webkit-transition-timing-function: linear;
+	transition-timing-function: linear;
+}
+
+.pats div:nth-child(1) {
+	width: 40px;
+	height: 40px;
+	left: 20%;
+}
+.pats div:nth-child(2) {
+	width: 60px;
+	height: 60px;
+	left: 40%;
+	-webkit-animation-delay: 1s;
+	animation-delay: 1s;
+	-webkit-animation-duration:97s;
+	animation-duration: 9s;
+}
+
+.pats div:nth-child(3) {
+	width: 50px;
+	height: 50px;
+	left: 60%;
+	-webkit-animation-delay: 1.5s;
+	animation-delay: 1.5s;
+	-webkit-animation-duration: 7s;
+	animation-duration: 7s;
+}
+
+.pats div:nth-child(4) {
+	width: 80px;
+	height: 80px;
+	left: 80%;
+	-webkit-animation-delay: 1s;
+	animation-delay: 1s;
+	-webkit-animation-duration: 11s;
+	animation-duration: 11s;
+}
+
+.pats div:nth-child(5) {
+	width: 50px;
+	height: 50px;
+	left: 50%;
+	-webkit-animation-delay: 0.75s;
+	animation-delay: 0.75s;
+	-webkit-animation-duration: 4s;
+	animation-duration: 4s;
+}
+
+@-webkit-keyframes square {
+	0% {
+	    -webkit-transform: translateY(0);
+	    transform: translateY(0);
+	}
+	100% {
+	    -webkit-transform: translateY(-1080px) rotate(630deg);
+	    transform: translateY(-1080px) rotate(630deg);
+	}
+}
+
+@keyframes square {
+	0% {
+	    -webkit-transform: translateY(0);
+	    transform: translateY(0);
+	}
+	100% {
+	    -webkit-transform: translateY(-1080px) rotate(630deg);
+	    transform: translateY(-1080px) rotate(630deg);
+	}
+}
