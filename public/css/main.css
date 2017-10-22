@@ -71,6 +71,10 @@
 	margin-bottom: 20px;
 }
 
+.has-margin-bottom {
+	margin-bottom: 15px !important;
+}
+
 .a-enter-vr-button {
 	position: fixed !important;
 	bottom: 10px !important;
