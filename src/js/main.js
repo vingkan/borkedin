@@ -161,10 +161,11 @@ function initCityParks(cityid) {
 }
 
 let landingHolder = document.getElementById('landing-holder');
+let fullVal = {};
 
 function initLanding() {
 	showPage('landing');
-	let ref = db.ref(`profile`)
+	let ref = db.ref(`profile`);
 	ref.once('value', (snap) => {
 		let val = snap.val() || {};
 		landingHolder.innerHTML = '';
@@ -173,8 +174,39 @@ function initLanding() {
 			let v = views.getLandingCard(doggo);
 			landingHolder.appendChild(v);
 		}
+		fullVal = val;
 	});
 }
+
+function initSearch(search) {
+	showPage('landing');
+	landingHolder.innerHTML = '';
+	let val = fullVal;
+	for (let did in val) {
+		let doggo = val[did];
+		let keep = false;
+		if (doggo.name.indexOf(search) > -1) {
+			keep = true;
+		}
+		let sk = doggo.skills || {};
+		let skills = Object.keys(sk).map(k => sk[k]).forEach((s) => {
+			if (s.skill.indexOf(search) > -1) {
+				keep = true;
+			}
+		});
+		if (keep) {
+			let v = views.getLandingCard(doggo);
+			landingHolder.appendChild(v);
+		}
+	}
+}
+
+let sb = document.getElementById('search-bar');
+sb.addEventListener('keyup', (e) => {
+	if (e.keyCode === 13) {
+		initSearch(sb.value);
+	}
+});
 
 document.getElementById('secret-rename').addEventListener('click', (e) => {
 	let name = prompt("Enter a New Name");
@@ -203,6 +235,27 @@ document.getElementById('secret-rename').addEventListener('click', (e) => {
 		}
 	});
 });*/
+
+window.sendPats = () => {
+	/*Array.from(document.getElementsByClassName('pat')).forEach((p) => {
+		p.style.display = 'block';
+	});*/
+	let ph = document.getElementById('pats-holder');
+	ph.innerHTML = `
+		<ul class="pats">
+			<div class="pat"></div>
+			<div class="pat"></div>
+			<div class="pat"></div>
+			<div class="pat"></div>
+			<div class="pat"></div>
+		</ul>
+	`;
+	setTimeout(function() {
+		Array.from(document.getElementsByClassName('pat')).forEach((p) => {
+			p.style.display = 'none';
+		});
+	}, 7000);
+}
 
 const PRETTY_NAMES = {
 	'bruno': '889880896479866881',
