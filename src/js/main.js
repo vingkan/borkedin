@@ -80,10 +80,33 @@ function addExperience(profileid) {
 	return db.ref(`profile/${profileid}/experience`).push(exp);
 }
 
+function initProfile(profileid, editMode) {
+	showPage('profile');
+	db.ref(`profile/${profileid}`).on('value', (snap) => {
+		let val = snap.val() || {};
+		renderProfile(val);
+	});
+	Array.from(document.getElementsByClassName('for-editor')).forEach((el) => {
+		if (editMode) {
+			el.classList.remove('is-hidden');
+		} else {
+			el.classList.add('is-hidden');
+		}
+	});
+	if (editMode) {
+		expSubmit.addEventListener('click', (e) => {
+			addExperience(profileid).then((done) => {
+				// 
+			}).catch(console.error);
+		});
+	}
+}
+
 let doggoName = document.getElementById('profile-doggo-name');
 let doggoImage = document.getElementById('profile-doggo-image');
 let expHolder = document.getElementById('experience-holder');
 let skillHolder = document.getElementById('skill-holder');
+let connectionHolder = document.getElementById('connection-holder');
 
 function renderProfile(profile) {
 	console.log(profile);
@@ -101,11 +124,24 @@ function renderProfile(profile) {
 	}
 	skillHolder.innerHTML = '';
 	let skillMap = profile.skills || {};
-	Object.keys(skillMap).map((key) => skillMap[key]).sort((a, b) => {
+	let skills = Object.keys(skillMap).map((key) => skillMap[key]).sort((a, b) => {
 		return b.endorsements - a.endorsements;
-	}).forEach((skill) => {
+	});
+	skills.forEach((skill) => {
 		let v = views.getSkillRow(skill);
 		skillHolder.appendChild(v);
+	});
+	connectionHolder.innerHTML = '';
+	let skillid = skills[0].id;
+	let query = db.ref(`profile`).orderByChild(`skills/${skillid}/endorsements`).limitToLast(6);
+	query.once('value', (snap) => {
+		let val = snap.val() || {};
+		console.log(val);
+		for (let did in val) {
+			let connec = val[did];
+			let v = views.getConnectionCard(connec);
+			connectionHolder.appendChild(v);
+		}
 	});
 }
 
@@ -127,21 +163,13 @@ window.main = () => {
 	let routes = {
 
 		'/profile/:profileid': (profileid) => {
-
 			console.log(profileid);
-			showPage('profile');
+			initProfile(profileid, false);
+		},
 
-			db.ref(`profile/${profileid}`).on('value', (snap) => {
-				let val = snap.val() || {};
-				renderProfile(val);
-			});
-
-			expSubmit.addEventListener('click', (e) => {
-				addExperience(profileid).then((done) => {
-					// 
-				}).catch(console.error);
-			});
-
+		'/profile/:profileid/edit': (profileid) => {
+			console.log(profileid);
+			initProfile(profileid, true);
 		},
 
 		'/parks': () => {

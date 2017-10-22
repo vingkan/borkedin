@@ -118,7 +118,7 @@
 							<div class="profile-image">
 								<div id="profile-doggo-image" class="is-filled-image is-circular" style="background-image: url('./public/img/colt-head.jpg');"></div>
 							</div>
-							<h1 id="profile-doggo-name" class="title is-1">Colt Daniels</h1>
+							<h1 class="title is-1"><span id="profile-doggo-name">Colt Daniels</span> <span class="tag is-warning">3<sup>rd</sup></span></h1>
 							<div class="field is-grouped is-grouped-centered">
 								<div class="group">
 									<button class="button is-primary">Connect</button>
@@ -134,7 +134,7 @@
 					<div class="profile-section content">
 						<h2 class="title is-2">Experience</h2>
 						<div id="experience-holder"></div>
-						<div class="profile-experience">
+						<div class="profile-experience is-hidden for-editor">
 							<div class="media">
 								<div class="media-left">
 									<figure class="image is-64x64">
@@ -161,7 +161,7 @@
 										</div>
 									</div>
 									<div class="control">
-  										<button id="experience-submit" class="button is-primary">Add new expawrience</button>
+  										<button id="experience-submit" class="button is-primary">Add New Expawrience</button>
 									</div>
 								</div>
 							</div>
@@ -177,21 +177,7 @@
 					</div>
 					<div class="profile-section content">
 						<h2 class="title is-2">Connections</h2>
-						<div class="columns is-multiline">
-							<div class="column is-6">
-								<div class="media">
-									<div class="media-left">
-										<figure class="image is-64x64">
-											<img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-										</figure>
-									</div>
-									<div class="media-content">
-										<h3 class="title is-3">Rex Roofer</h3>
-										<p class="subtitle is-5 is-followed">NFL Player (National Fetching League)</p>
-									</div>
-								</div>
-							</div>
-						</div>
+						<div id="connection-holder" class="columns is-multiline"></div>
 					</div>
 					<div class="profile-section content">
 						<h2 class="title is-2">Causes for Frens</h2>

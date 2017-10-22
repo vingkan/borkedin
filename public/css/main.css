@@ -18,6 +18,10 @@
 	color: white !important;
 }
 
+.is-hidden {
+	display: none;
+}
+
 .navbar-logo {
 	margin-right: 10px;
 }
@@ -47,6 +51,11 @@
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
+}
+
+.image.is-64x64 .is-filled-image {
+	width: 64px;
+	height: 64px;
 }
 
 .subtitle.is-followed {
