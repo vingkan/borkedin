@@ -1,3 +1,5 @@
+let vm = require('./views');
+let views = vm.Views();
 let pm = require('./parks');
 let parksModule = pm.ParksModule();
 let config = require('./config');
@@ -50,6 +52,21 @@ function addExperience(profileid) {
 	return db.ref(`profile/${profileid}/experience`).push(exp);
 }
 
+let expHolder = document.getElementById('experience-holder');
+
+function renderProfile(profile) {
+	expTitle.value = '';
+	expRange.value = '';
+	expDesc.value = '';
+	expHolder.innerHTML = '';
+	let expMap = profile.experience || {};
+	for (let expid in expMap) {
+		let exp = profile.experience[expid];
+		let v = views.getExperienceCard(exp);
+		expHolder.appendChild(v);
+	}
+}
+
 window.main = () => {
 
 	let routes = {
@@ -59,9 +76,14 @@ window.main = () => {
 			console.log(profileid);
 			showPage('profile');
 
+			db.ref(`profile/${profileid}`).on('value', (snap) => {
+				let val = snap.val() || {};
+				renderProfile(val);
+			});
+
 			expSubmit.addEventListener('click', (e) => {
 				addExperience(profileid).then((done) => {
-
+					// 
 				}).catch(console.error);
 			});
 
