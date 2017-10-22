@@ -109,6 +109,19 @@ function renderProfile(profile) {
 	});
 }
 
+function initCityParks(cityid) {
+	if (parksModule.CITIES.indexOf(cityid) > -1) {
+		showPage('parks');
+		parksModule.getParks(cityid).then((data) => {
+			let mapEl = document.getElementById('map-holder');
+			let map = parksModule.renderMap(data, mapEl, onMarkerClick);
+			onMarkerClick(data[0]);
+		}).catch(console.error);
+	} else {
+		document.location = './#/404';
+	}
+}
+
 window.main = () => {
 
 	let routes = {
@@ -131,18 +144,13 @@ window.main = () => {
 
 		},
 
+		'/parks': () => {
+			initCityParks('nashville');
+		},
+
 		'/parks/:cityid': (cityid) => {
 			console.log(cityid);
-			if (parksModule.CITIES.indexOf(cityid) > -1) {
-				showPage('parks');
-				parksModule.getParks(cityid).then((data) => {
-					let mapEl = document.getElementById('map-holder');
-					let map = parksModule.renderMap(data, mapEl, onMarkerClick);
-					onMarkerClick(data[0]);
-				}).catch(console.error);
-			} else {
-				document.location = './#/404';
-			}
+			initCityParks(cityid);
 		},
 
 		'/vr/:parkid': (parkid) => {

@@ -7,7 +7,7 @@ let Views = () => {
 				<div class="media">
 					<div class="media-left">
 						<figure class="image is-64x64">
-							<img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+							<img src="./public/img/doggoaward.png" alt="Placeholder image">
 						</figure>
 					</div>
 					<div class="media-content">
