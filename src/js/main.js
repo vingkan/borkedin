@@ -1,3 +1,5 @@
+let vm = require('./views');
+let views = vm.Views();
 let pm = require('./parks');
 let parksModule = pm.ParksModule();
 let config = require('./config');
@@ -36,23 +38,95 @@ function onMarkerClick(park) {
 
 }
 
+let expTitle = document.getElementById('experience-title');
+let expRange = document.getElementById('experience-range');
+let expDesc = document.getElementById('experience-description');
+let expSubmit = document.getElementById('experience-submit');
+
+function addExperience(profileid) {
+	let exp = {
+		title: expTitle.value,
+		range: expRange.value,
+		description: expDesc.value
+	}
+	return db.ref(`profile/${profileid}/experience`).push(exp);
+}
+
+let doggoName = document.getElementById('profile-doggo-name');
+let doggoImage = document.getElementById('profile-doggo-image');
+let expHolder = document.getElementById('experience-holder');
+let skillHolder = document.getElementById('skill-holder');
+
+function renderProfile(profile) {
+	console.log(profile);
+	doggoName.innerText = profile.name;
+	doggoImage.style.backgroundImage = `url('${profile.image}')`;
+	expTitle.value = '';
+	expRange.value = '';
+	expDesc.value = '';
+	expHolder.innerHTML = '';
+	let expMap = profile.experience || {};
+	for (let expid in expMap) {
+		let exp = profile.experience[expid];
+		let v = views.getExperienceCard(exp);
+		expHolder.appendChild(v);
+	}
+	skillHolder.innerHTML = '';
+	let skillMap = profile.skills || {};
+	Object.keys(skillMap).map((key) => skillMap[key]).sort((a, b) => {
+		return b.endorsements - a.endorsements;
+	}).forEach((skill) => {
+		let v = views.getSkillRow(skill);
+		skillHolder.appendChild(v);
+	});
+}
+
 window.main = () => {
 
 	let routes = {
+
 		'/profile/:profileid': (profileid) => {
+
 			console.log(profileid);
 			showPage('profile');
+
+			db.ref(`profile/${profileid}`).on('value', (snap) => {
+				let val = snap.val() || {};
+				renderProfile(val);
+			});
+
+			expSubmit.addEventListener('click', (e) => {
+				addExperience(profileid).then((done) => {
+					// 
+				}).catch(console.error);
+			});
+
 		},
+
 		'/parks/:cityid': (cityid) => {
 			console.log(cityid);
-			showPage('parks');
-			parksModule.getParks(cityid).then((data) => {
+			if (parksModule.CITIES.indexOf(cityid) > -1) {
+				showPage('parks');
+				parksModule.getParks(cityid).then((data) => {
 
-				let mapEl = document.getElementById('map-holder');
-				let map = parksModule.renderMap(data, mapEl, onMarkerClick);
+					let mapEl = document.getElementById('map-holder');
+					let map = parksModule.renderMap(data, mapEl, onMarkerClick);
 
-			}).catch(console.error);
+				}).catch(console.error);
+			} else {
+				document.location = './#/404';
+			}
+		},
+
+		'/vr/:parkid': (parkid) => {
+			console.log(parkid);
+			document.location = `./${parkid}.html`;
+		},
+
+		'/404': () => {
+			showPage('404');
 		}
+
 	}
 
 	let router = Router(routes);

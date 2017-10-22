@@ -6,6 +6,10 @@
 	background: #59A5CC;
 }
 
+.title {
+	font-weight: bold !important;
+}
+
 .is-bold {
 	font-weight: bold !important;
 }
@@ -67,19 +71,8 @@
 	margin-bottom: 20px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.a-enter-vr-button {
+	position: fixed !important;
+	bottom: 10px !important;
+	right: 10px !important;
+}
