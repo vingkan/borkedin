@@ -29,6 +29,7 @@
     "gulp-sourcemaps": "^2.6.0",
     "gulp-uglify": "^3.0.0",
     "merge-stream": "^1.0.1",
+    "moment": "^2.19.1",
     "prometheusjs": "^1.6.5",
     "request": "^2.81.0",
     "sass-module-importer": "^1.4.0",
