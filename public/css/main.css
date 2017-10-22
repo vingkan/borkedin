@@ -6,6 +6,10 @@
 	background: #59A5CC;
 }
 
+.title {
+	font-weight: bold !important;
+}
+
 .is-bold {
 	font-weight: bold !important;
 }
