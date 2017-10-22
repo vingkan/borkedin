@@ -10,6 +10,7 @@ let cityParksGetter = {
 				}).map((park) => {
 					let entry = {
 						name: park.park_name,
+						address: park.mapped_location_address,
 						latitude: park.mapped_location.coordinates[1],
 						longitude: park.mapped_location.coordinates[0],
 						cityid: 'nashville',
@@ -25,13 +26,14 @@ let cityParksGetter = {
 	chicago: () => {
 		return new Promise((resolve, reject) => {
 			$.get("https://data.cityofchicago.org/resource/4xwe-2j3y.json", {
-				'$where': 'dog_friendly >= 0'
+				'$where': 'dog_friendly >= 1'
 			}).then((data) => {
 				let cleaned = data.filter((park) => {
 					return park.location;
 				}).map((park) => {
 					let entry = {
 						name: park.park_name,
+						address: park.location_address,
 						latitude: park.location.coordinates[1],
 						longitude: park.location.coordinates[0],
 						cityid: 'chicago',
@@ -54,6 +56,7 @@ let cityParksGetter = {
 				}).map((park) => {
 					let entry = {
 						name: park.location_name,
+						address: `${park.stnumber || ''} ${park.stdirection || ''} ${park.stname || ''} ${park.stsuffix || ''}`,
 						latitude: parseFloat(park.geolat),
 						longitude: parseFloat(park.geolong),
 						cityid: 'losangeles',
@@ -77,6 +80,7 @@ let cityParksGetter = {
 					let coords = park.the_geom.coordinates[0][0][0];
 					let entry = {
 						name: park.signname,
+						address: park.location,
 						latitude: coords[1],
 						longitude: coords[0],
 						cityid: 'newyork',
@@ -99,6 +103,7 @@ let cityParksGetter = {
 				}).map((park) => {
 					let entry = {
 						name: park.common_name,
+						address: JSON.parse(park.location_1).address,
 						latitude: parseFloat(park.location_1.latitude),
 						longitude: parseFloat(park.location_1.longitude),
 						cityid: 'seattle',
@@ -116,12 +121,14 @@ let cityParksGetter = {
 			$.get('https://data.calgary.ca/resource/enr4-crti.json', {
 
 			}).then((data) => {
+				console.log(data);
 				let cleaned = data.filter((park) => {
 					return park.the_geom;
 				}).map((park) => {
 					let coords = park.the_geom.coordinates[0][0][0];
 					let entry = {
 						name: park.description,
+						address: park.off_leash_area_id,
 						latitude: coords[1],
 						longitude: coords[0],
 						cityid: 'calgary',
