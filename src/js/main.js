@@ -30,10 +30,14 @@ function showPage(id) {
 
 const PARK_SPECIALS = {
 	'Centennial Park': {
-		vr: 'cen'
+		vr: 'cen',
+		meetup: 'https://www.facebook.com/329221374096563/photos/a.329225124096188.1073741827.329221374096563/559837747701590'
 	},
 	'William A. Pitts Park': {
 		vr: 'wap'
+	},
+	'Edwin Warner Park': {
+		meetup: 'https://www.meetup.com/Nashville-BarkHappy-Dog-Meetup/'
 	}
 }
 
@@ -53,56 +57,13 @@ function onMarkerClick(park) {
 		let spec = PARK_SPECIALS[park.name];
 		if (spec.vr) {
 			parkVR.href = `./${spec.vr}.html`;
-			parkVR.style.display = 'block';
+			parkVR.style.display = 'inline-block';
 		}
 		if (spec.meetup) {
 			parkMeetup.href = spec.meetup;
-			parkMeetup.style.display = 'block';
+			parkMeetup.style.display = 'inline-block';
 		}
 	}
-}
-
-let expTitle = document.getElementById('experience-title');
-let expRange = document.getElementById('experience-range');
-let expDesc = document.getElementById('experience-description');
-let expSubmit = document.getElementById('experience-submit');
-
-function addExperience(profileid) {
-	let exp = {
-		title: expTitle.value,
-		range: expRange.value,
-		description: expDesc.value
-	}
-	return db.ref(`profile/${profileid}/experience`).push(exp);
-}
-
-let doggoName = document.getElementById('profile-doggo-name');
-let doggoImage = document.getElementById('profile-doggo-image');
-let expHolder = document.getElementById('experience-holder');
-let skillHolder = document.getElementById('skill-holder');
-
-function renderProfile(profile) {
-	console.log(profile);
-	doggoName.innerText = profile.name;
-	doggoImage.style.backgroundImage = `url('${profile.image}')`;
-	expTitle.value = '';
-	expRange.value = '';
-	expDesc.value = '';
-	expHolder.innerHTML = '';
-	let expMap = profile.experience || {};
-	for (let expid in expMap) {
-		let exp = profile.experience[expid];
-		let v = views.getExperienceCard(exp);
-		expHolder.appendChild(v);
-	}
-	skillHolder.innerHTML = '';
-	let skillMap = profile.skills || {};
-	Object.keys(skillMap).map((key) => skillMap[key]).sort((a, b) => {
-		return b.endorsements - a.endorsements;
-	}).forEach((skill) => {
-		let v = views.getSkillRow(skill);
-		skillHolder.appendChild(v);
-	});
 }
 
 let expTitle = document.getElementById('experience-title');
