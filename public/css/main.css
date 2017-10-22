@@ -70,3 +70,9 @@
 .profile-experience {
 	margin-bottom: 20px;
 }
+
+.a-enter-vr-button {
+	position: fixed !important;
+	bottom: 10px !important;
+	right: 10px !important;
+}

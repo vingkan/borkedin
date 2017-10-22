@@ -8,7 +8,6 @@ let db = FirebaseApp.database();
 
 const GOOGLE_MAPS_API_KEY = 'AIzaSyBIZRYftboGELfzOFmSUrcMkYwWtQN7sF8';
 const PARAMS = getQueryParams(document.location.search);
-const GAME = PARAMS.game;
 
 function getQueryParams(qs) {
 	qs = qs.split('+').join(' ');
@@ -21,7 +20,12 @@ function getQueryParams(qs) {
 	return params;
 }
 
+let videoHolder = document.getElementById('video-holder');
+
 function showPage(id) {
+	if (id !== 'vr') {
+		videoHolder.innerHTML = '';
+	}
 	Array.from(document.getElementsByClassName('page-hidden')).forEach((page) => {
 		page.style.display = 'none';
 	});
@@ -112,6 +116,21 @@ window.main = () => {
 				let map = parksModule.renderMap(data, mapEl, onMarkerClick);
 
 			}).catch(console.error);
+		},
+
+		'/vr/:parkid': (parkid) => {
+			console.log(parkid);
+			let html = `
+				<a-scene>
+					<a-assets>
+						<video id="video" src="./public/video/${parkid}.mp4" autoplay loop crossorigin="anonymous"></video>
+					</a-assets>
+					<a-videosphere src="#video" rotation="0 180 0"></a-videosphere>
+				</a-scene>
+			`;
+			videoHolder.innerHTML = html;
+			console.log(videoHolder)
+			showPage('vr');
 		}
 
 	}
