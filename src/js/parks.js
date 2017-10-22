@@ -101,9 +101,13 @@ let cityParksGetter = {
 				let cleaned = data.filter((park) => {
 					return park.location_1;
 				}).map((park) => {
+					let loc = {};
+					try {
+						loc = JSON.parse(park.location_1);
+					} catch (err) {}
 					let entry = {
 						name: park.common_name,
-						address: JSON.parse(park.location_1).address,
+						address: loc.address || 'No Address',
 						latitude: parseFloat(park.location_1.latitude),
 						longitude: parseFloat(park.location_1.longitude),
 						cityid: 'seattle',

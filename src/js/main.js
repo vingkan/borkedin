@@ -28,14 +28,38 @@ function showPage(id) {
 	document.getElementById(`page-${id}`).style.display = 'block';
 }
 
+const PARK_SPECIALS = {
+	'Centennial Park': {
+		vr: 'cen'
+	},
+	'William A. Pitts Park': {
+		vr: 'wap'
+	}
+}
 
 let parkName = document.getElementById('park-name');
+let parkAddress = document.getElementById('park-address');
 let parkImage = document.getElementById('park-image');
+let parkMeetup = document.getElementById('park-meetup');
+let parkVR = document.getElementById('park-vr');
 
 function onMarkerClick(park) {
 	parkName.innerText = park.name;
-	//parkImage.src = `https://maps.googleapis.com/maps/api/streetview?size=600x300&location=${park.latitude},${park.longitude}&heading=151.78&pitch=-0.76&key=${GOOGLE_MAPS_API_KEY}`;
-
+	parkAddress.innerText = park.address;
+	parkImage.src = `https://maps.googleapis.com/maps/api/streetview?size=600x300&location=${park.latitude},${park.longitude}&heading=151.78&pitch=-0.76&key=${GOOGLE_MAPS_API_KEY}`;
+	parkMeetup.style.display = 'none';
+	parkVR.style.display = 'none';
+	if (park.name in PARK_SPECIALS) {
+		let spec = PARK_SPECIALS[park.name];
+		if (spec.vr) {
+			parkVR.href = `./${spec.vr}.html`;
+			parkVR.style.display = 'block';
+		}
+		if (spec.meetup) {
+			parkMeetup.href = spec.meetup;
+			parkMeetup.style.display = 'block';
+		}
+	}
 }
 
 let expTitle = document.getElementById('experience-title');
@@ -108,10 +132,9 @@ window.main = () => {
 			if (parksModule.CITIES.indexOf(cityid) > -1) {
 				showPage('parks');
 				parksModule.getParks(cityid).then((data) => {
-
 					let mapEl = document.getElementById('map-holder');
 					let map = parksModule.renderMap(data, mapEl, onMarkerClick);
-
+					onMarkerClick(data[0]);
 				}).catch(console.error);
 			} else {
 				document.location = './#/404';
