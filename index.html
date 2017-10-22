@@ -3,16 +3,17 @@
 	<head>
 		<title>BorkedIn</title>
 
+		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="keywords" content="dogs, professional, careers">
 		<meta name="description" content="LinkedIn, but for dogs.">
 
 		<meta property="og:title" content="BorkedIn">
 		<meta property="og:description" content="LinkedIn, but for dogs.">
-		<!--<meta property="og:image" content="https://fantasycivics.github.io/public/img/tile-color.png">-->
+		<meta property="og:image" content="https://vingkan.github.io/borkedin/public/img/favicon.png">
 
 		<link rel="icon" sizes="192x192" href="./public/img/favicon.png">
-		<!--<link rel="image_src" href="https://fantasycivics.github.io/public/img/tile-color.png">-->
+		<link rel="image_src" href="https://vingkan.github.io/borkedin/public/img/favicon.png">
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://rawgit.com/flatiron/director/master/build/director.min.js"></script>
@@ -25,6 +26,7 @@
 		<link rel="stylesheet" href="./public/css/styles.css">
 		<link rel="stylesheet" href="./public/css/main.css">
 		<link rel="stylesheet" href="./public/css/loader.css">
+		<script src="./public/js/aframe.js"></script>
 		
 		<style type="text/css">
 
@@ -48,19 +50,60 @@
 			</div>
 		</nav>
 
+		<!-- /404 -->
+		<div id="page-404" class="page-hidden">
+			<section class="hero is-fullheight">
+				<div class="hero-body is-gray">
+					<div class="container has-text-centered">
+						<h1 class="title is-1">Sorry :(</h1>
+						<p class="subtitle is-4">We could not find that ball...</p>
+					</div>
+				</div>
+			</section>
+		</div>
+
 		<!-- /parks -->
 		<div id="page-parks" class="page-hidden">
 			<section class="hero">
-				<div class="hero-body is-gray">
-					<div id="map-holder"></div>
-				</div>
+				<div id="map-holder"></div>
 			</section>
 			<section class="section">
 				<div class="container">
-					<div class="profile-section content">
-						<h2 id="park-name" class="title is-2">Centennial Park</h2>
-						<p class="subtitle is-5">This is a great park to take dogs.</p>
-						<img id="park-image">
+					<div class="park-section content">
+						<div class="columns">
+							<div class="column is-6">
+								<h2 id="park-name" class="title is-2">Park Name</h2>
+								<p id="park-address" class="subtitle is-5">Park Address</p>
+								<div class="field is-grouped">
+									<div class="group">
+										<a id="park-meetup" class="button is-primary">Join Park Meetup</a>
+										<a id="park-vr" class="button is-primary is-outlined">Enter Park VR</a>
+									</div>
+								</div>
+								<p class="subtitle is-large">Don't worry. No uncomfterble or slighlty nervous doggos here.</p>
+							</div>
+							<div class="column is-6">
+								<img id="park-image">
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="section is-gray">
+				<div class="container">
+					<div class="park-section">
+						<h3 class="title is-3 has-text-centered">Explore Other Cities</h3>
+						<p class="subtitle is-5">BorkedIn helps woofers find both professional and recreational communities in six cities around the world.</p>
+						<div class="field is-grouped is-grouped-centered">
+							<div class="group">
+								<a href="./#/parks/nashville" class="button is-primary is-outlined">Nashville</a>
+								<a href="./#/parks/chicago" class="button is-primary is-outlined">Chicago</a>
+								<a href="./#/parks/newyork" class="button is-primary is-outlined">New York</a>
+								<a href="./#/parks/losangeles" class="button is-primary is-outlined">Los Angeles</a>
+								<a href="./#/parks/seattle" class="button is-primary is-outlined">Seattle</a>
+								<a href="./#/parks/calgary" class="button is-primary is-outlined">Calgary</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</section>
@@ -158,7 +201,7 @@
 									<div class="media-left">
 										<figure class="image is-128x128">
 											<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/American_Society_for_the_Prevention_of_Cruelty_to_Animals_%28logo%29.svg/1024px-American_Society_for_the_Prevention_of_Cruelty_to_Animals_%28logo%29.svg.png" alt="ASPCA.png">
-											<button class="button is-primary is-small">Henslo, donate hur.</button>
+											<button class="button is-primary is-small">Henlo, donate hur.</button>
 										</figure>
 									</div>
 									<div class="media-content">
