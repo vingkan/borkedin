@@ -18,6 +18,14 @@
 	color: white !important;
 }
 
+.is-hidden {
+	display: none;
+}
+
+.is-neatly-spaced {
+	margin-top: 0.75rem !important;
+}
+
 .navbar-logo {
 	margin-right: 10px;
 }
@@ -48,6 +56,22 @@
 	-o-background-size: cover;
 	background-size: cover;
 }
+
+.image.is-64x64 .is-filled-image {
+	width: 64px;
+	height: 64px;
+}
+
+.image.is-128x128 .is-filled-image {
+	width: 128px;
+	height: 128px;
+}
+
+.image.is-225x225 .is-filled-image {
+	width: 225px;
+	height: 225px;
+}
+
 
 .subtitle.is-followed {
 	margin-bottom: 0 !important;

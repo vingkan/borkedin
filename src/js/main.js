@@ -80,10 +80,36 @@ function addExperience(profileid) {
 	return db.ref(`profile/${profileid}/experience`).push(exp);
 }
 
+let CURRENT_PROFILE_ID = false;
+
+function initProfile(profileid, editMode) {
+	CURRENT_PROFILE_ID = profileid;
+	showPage('profile');
+	db.ref(`profile/${profileid}`).on('value', (snap) => {
+		let val = snap.val() || {};
+		renderProfile(val);
+	});
+	Array.from(document.getElementsByClassName('for-editor')).forEach((el) => {
+		if (editMode) {
+			el.classList.remove('is-hidden');
+		} else {
+			el.classList.add('is-hidden');
+		}
+	});
+	if (editMode) {
+		expSubmit.addEventListener('click', (e) => {
+			addExperience(profileid).then((done) => {
+				// 
+			}).catch(console.error);
+		});
+	}
+}
+
 let doggoName = document.getElementById('profile-doggo-name');
 let doggoImage = document.getElementById('profile-doggo-image');
 let expHolder = document.getElementById('experience-holder');
 let skillHolder = document.getElementById('skill-holder');
+let connectionHolder = document.getElementById('connection-holder');
 
 function renderProfile(profile) {
 	console.log(profile);
@@ -101,48 +127,125 @@ function renderProfile(profile) {
 	}
 	skillHolder.innerHTML = '';
 	let skillMap = profile.skills || {};
-	Object.keys(skillMap).map((key) => skillMap[key]).sort((a, b) => {
+	let skills = Object.keys(skillMap).map((key) => skillMap[key]).sort((a, b) => {
 		return b.endorsements - a.endorsements;
-	}).forEach((skill) => {
+	});
+	skills.forEach((skill) => {
 		let v = views.getSkillRow(skill);
 		skillHolder.appendChild(v);
 	});
+	connectionHolder.innerHTML = '';
+	let skillid = skills[0].id;
+	let query = db.ref(`profile`).orderByChild(`skills/${skillid}/endorsements`).limitToLast(6);
+	query.once('value', (snap) => {
+		let val = snap.val() || {};
+		for (let did in val) {
+			let connec = val[did];
+			let v = views.getConnectionCard(connec);
+			connectionHolder.appendChild(v);
+		}
+	});
+}
+
+function initCityParks(cityid) {
+	if (parksModule.CITIES.indexOf(cityid) > -1) {
+		showPage('parks');
+		parksModule.getParks(cityid).then((data) => {
+			let mapEl = document.getElementById('map-holder');
+			let map = parksModule.renderMap(data, mapEl, onMarkerClick);
+			onMarkerClick(data[0]);
+		}).catch(console.error);
+	} else {
+		document.location = './#/404';
+	}
+}
+
+let landingHolder = document.getElementById('landing-holder');
+
+function initLanding() {
+	showPage('landing');
+	let ref = db.ref(`profile`)
+	ref.once('value', (snap) => {
+		let val = snap.val() || {};
+		landingHolder.innerHTML = '';
+		for (let did in val) {
+			let doggo = val[did];
+			let v = views.getLandingCard(doggo);
+			landingHolder.appendChild(v);
+		}
+	});
+}
+
+document.getElementById('secret-rename').addEventListener('click', (e) => {
+	let name = prompt("Enter a New Name");
+	db.ref(`profile/${CURRENT_PROFILE_ID}/name`).set(name);
+});
+
+/*db.ref(`profile`).once('value', (snap) => {
+	let val = snap.val() || {};
+	let pids = Object.keys(val);
+	let idx = 0;
+	let nextID = pids[idx];
+	document.location = `/#/profile/${nextID}`;
+	let next = document.getElementById('next');
+	next.addEventListener('click', (e) => {
+		if (nextID) {
+			let name = doggoName.innerText;
+			db.ref(`profile/${nextID}/name`).set(name).then((done) => {
+				idx++;
+				nextID = pids[idx];
+				if (!nextID) {
+					alert('all done!!');
+				} else {
+					document.location = `/#/profile/${nextID}`;
+				}
+			}).catch(console.error);
+		}
+	});
+});*/
+
+const PRETTY_NAMES = {
+	'bruno': '889880896479866881',
+	'snuggles': '900429189278511105'
 }
 
 window.main = () => {
 
+	initLanding();
+
 	let routes = {
 
+		'/': () => {
+			initLanding();
+		},
+
+		'/profile': () => {
+			initLanding();
+		},
+
 		'/profile/:profileid': (profileid) => {
-
 			console.log(profileid);
-			showPage('profile');
+			if (profileid in PRETTY_NAMES) {
+				profileid = PRETTY_NAMES[profileid];
+			}
+			initProfile(profileid, false);
+		},
 
-			db.ref(`profile/${profileid}`).on('value', (snap) => {
-				let val = snap.val() || {};
-				renderProfile(val);
-			});
+		'/profile/:profileid/edit': (profileid) => {
+			console.log(profileid);
+			if (profileid in PRETTY_NAMES) {
+				profileid = PRETTY_NAMES[profileid];
+			}
+			initProfile(profileid, true);
+		},
 
-			expSubmit.addEventListener('click', (e) => {
-				addExperience(profileid).then((done) => {
-					// 
-				}).catch(console.error);
-			});
-
+		'/parks': () => {
+			initCityParks('nashville');
 		},
 
 		'/parks/:cityid': (cityid) => {
 			console.log(cityid);
-			if (parksModule.CITIES.indexOf(cityid) > -1) {
-				showPage('parks');
-				parksModule.getParks(cityid).then((data) => {
-					let mapEl = document.getElementById('map-holder');
-					let map = parksModule.renderMap(data, mapEl, onMarkerClick);
-					onMarkerClick(data[0]);
-				}).catch(console.error);
-			} else {
-				document.location = './#/404';
-			}
+			initCityParks(cityid);
 		},
 
 		'/vr/:parkid': (parkid) => {
