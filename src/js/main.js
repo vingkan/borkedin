@@ -52,9 +52,15 @@ function addExperience(profileid) {
 	return db.ref(`profile/${profileid}/experience`).push(exp);
 }
 
+let doggoName = document.getElementById('profile-doggo-name');
+let doggoImage = document.getElementById('profile-doggo-image');
 let expHolder = document.getElementById('experience-holder');
+let skillHolder = document.getElementById('skill-holder');
 
 function renderProfile(profile) {
+	console.log(profile);
+	doggoName.innerText = profile.name;
+	doggoImage.style.backgroundImage = `url('${profile.image}')`;
 	expTitle.value = '';
 	expRange.value = '';
 	expDesc.value = '';
@@ -65,6 +71,14 @@ function renderProfile(profile) {
 		let v = views.getExperienceCard(exp);
 		expHolder.appendChild(v);
 	}
+	skillHolder.innerHTML = '';
+	let skillMap = profile.skills || {};
+	Object.keys(skillMap).map((key) => skillMap[key]).sort((a, b) => {
+		return b.endorsements - a.endorsements;
+	}).forEach((skill) => {
+		let v = views.getSkillRow(skill);
+		skillHolder.appendChild(v);
+	});
 }
 
 window.main = () => {

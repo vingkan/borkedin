@@ -21,6 +21,24 @@ let Views = () => {
 				div.innerHTML = html;
 				div.classList.add('profile-experience');
 			return div;
+		},
+
+		getSkillRow: (model) => {
+			let classColor = (model.frequency < 0.45) ? 'is-success' : 'is-warning';
+			let html = `
+				<td>
+					<div class="tags has-addons">
+						<span class="tag is-medium">${model.skill}</i></span>
+						<span class="tag is-medium ${classColor}">${model.endorsements}</i></span>
+					</div>
+				</td>
+				<td>
+					<p class="has-text-right"><span class="is-bold">${Math.round(model.frequency * 100)}%</span> of members are skilled in this.</p>
+				</td>
+			`;
+			let tr = document.createElement('tr');
+				tr.innerHTML = html;
+			return tr;
 		}
 
 	}
